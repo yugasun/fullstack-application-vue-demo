@@ -1,0 +1,24 @@
+name: fullstack-application-vue-demo
+
+frontend:
+  component: '@serverless/tencent-website'
+  # more configuration for @serverless/tencent-website, 
+  # refer to: https://github.com/serverless-components/tencent-website/blob/master/docs/configure.md
+  inputs:
+    code:
+      src: dist
+      root: frontend
+      hook: npm run build
+    env:
+      # get api url after below api service deployed.
+      apiUrl: ${api.url}
+
+api:
+  component: '@serverless/tencent-express'
+  # more configuration for @serverless/tencent-website, 
+  # refer to: https://github.com/serverless-components/tencent-express/blob/master/docs/configure.md
+  inputs:
+    code: ./api
+    functionName: fullstack-vue-api-demo
+    apigatewayConf:
+      protocol: https
